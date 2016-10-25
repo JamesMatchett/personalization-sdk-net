@@ -13,10 +13,10 @@ namespace KenticoCloud.Engage.Tests
 
         public EngageClientTests()
         {
-            _uid = "49d505aaa8316229";
-            _sid = "93786ec335de0444";
-            var apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE0NzczNzc0MTQsImV4cCI6MTUwODkxMzQxNCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsImRuIjoibG9jYWxob3N0In0.FqFOXw38U7ka4RN58YhXEjWqalCvzTA43ZsWGSnsVTQ";
-            var apiUri = "http://localhost:34245";
+            _uid = "";
+            _sid = "";
+            var apiKey = "";
+            var apiUri = "";
             _client = new EngageClient(apiUri, apiKey);
         }
 
