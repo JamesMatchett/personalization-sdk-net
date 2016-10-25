@@ -4,6 +4,7 @@
         <id>$id$</id>
         <version>$version$</version>
         <authors>$author$</authors>
+        <projectUrl>https://github.com/Kentico/Engage-.NET-SDK</projectUrl>
         <licenseUrl>https://raw.githubusercontent.com/Kentico/Engage-.NET-SDK/master/LICENSE</licenseUrl>
         <iconUrl>http://kentico.com/favicon.ico</iconUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("KenticoCloud.Engage.MVC")]
-[assembly: AssemblyDescription("MVC extension of the Kentico Engage SDK")]
+[assembly: AssemblyDescription("Kentico Engage SDK MVC Extension for .NET 4.5")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico software")]
-[assembly: AssemblyProduct("Kentico Cloud Engage .NET SDK MVC Extension")]
-[assembly: AssemblyCopyright("Copyright © Kentico software 2016")]
+[assembly: AssemblyProduct("Kentico Engage SDK MVC Extension for .NET")]
+[assembly: AssemblyCopyright("© 2016 Kentico Software. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]

@@ -4,11 +4,12 @@
         <id>$id$</id>
         <version>$version$</version>
         <authors>$author$</authors>
+        <projectUrl>https://github.com/Kentico/Engage-.NET-SDK</projectUrl>
         <licenseUrl>https://raw.githubusercontent.com/Kentico/Engage-.NET-SDK/master/LICENSE</licenseUrl>
         <iconUrl>http://kentico.com/favicon.ico</iconUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>$description$</description>
-	<tags>kentico, aspnet, mvc, aspnetmvc</tags>
+		<tags>kentico, aspnet, mvc, aspnetmvc</tags>
         <copyright>© 2016 Kentico Software. All rights reserved.</copyright>
         <language>en-US</language>
         <releaseNotes></releaseNotes>
