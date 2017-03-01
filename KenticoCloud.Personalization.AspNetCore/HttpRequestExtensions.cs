@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Http;
 
-namespace KenticoCloud.Personalization.MVC
+namespace KenticoCloud.Personalization.AspNetCore
 {
     /// <summary>
     /// Extension methods to provide access to Kentico Cloud Personalization IDs

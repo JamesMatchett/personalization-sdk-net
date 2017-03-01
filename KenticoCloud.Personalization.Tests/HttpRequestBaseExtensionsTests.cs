@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using KenticoCloud.Personalization.MVC;
+using KenticoCloud.Personalization.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using NSubstitute;

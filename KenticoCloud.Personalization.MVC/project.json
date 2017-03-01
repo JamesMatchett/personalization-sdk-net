@@ -1,16 +1,8 @@
-{
-  "title": "Kentico Cloud Personalization MVC SDK",
+﻿{
+  "title": "Kentico Cloud Personalization AspNetCore SDK",
   "authors": [ "Kentico Software" ],
   "copyright": "(c) 2016 Kentico Software. All rights reserved.",
-  "dependencies": {
-    "Newtonsoft.Json": "9.0.1",
-    "Microsoft.AspNetCore.Mvc": "1.0.1"
-  },
-  "description": "Kentico Cloud Personalization MVC SDK enables you to connect your .NET applications to Kentico Cloud and retrieve content from your projects. For more information about Kentico Cloud, see https://kenticocloud.com/.",
-  "frameworks": {
-    "net451": {},
-    "netstandard1.6": {}
-  },
+  "description": "Kentico Cloud Personalization AspNetCore SDK enables you to connect your .NET applications to Kentico Cloud and retrieve content from your projects. For more information about Kentico Cloud, see https://kenticocloud.com/.",
   "language": "en-us",
   "packOptions": {
     "iconUrl": "http://kentico.com/favicon.ico",
@@ -22,8 +14,22 @@
       "url": "https://github.com/Kentico/personalization-sdk-net.git"
     },
     "requireLicenseAcceptance": true,
-    "summary": "Kentico Cloud Delivery SDK",
+    "summary": "Kentico Cloud Personalization SDK",
     "tags": [ "kentico", "mvc", "aspnet", "aspnetmvc" ]
   },
+
+  "dependencies": {
+    "Microsoft.AspNet.Mvc": "5.2.3"
+  },
+
+  "frameworks": {
+    "net45": {
+      "imports": "dnxcore50",
+      "frameworkAssemblies": {
+        "System.Web": "4.0.0.0"
+      }
+    }
+  },
+
   "version": "1.0.0-*"
 }

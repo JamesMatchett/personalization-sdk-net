@@ -4,7 +4,7 @@
   "authors": [ "Kentico Software" ],
   "dependencies": {
     "KenticoCloud.Personalization": "1.0.*",
-    "KenticoCloud.Personalization.MVC": "1.0.*",
+    "KenticoCloud.Personalization.AspNetCore": "1.0.*",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
