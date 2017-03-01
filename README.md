@@ -1,5 +1,12 @@
 # Kentico Cloud Personalization .NET SDK
 
+[![Build status](https://ci.appveyor.com/api/projects/status/bbn6iy1yok766yux/branch/master?svg=true)](https://ci.appveyor.com/project/kentico/personalization-sdk-net/branch/master)
+[![NuGet](https://img.shields.io/nuget/v/KenticoCloud.Personalization.svg)](https://www.nuget.org/packages/KenticoCloud.Personalization) KenticoCloud.Personalization
+[![NuGet](https://img.shields.io/nuget/v/KenticoCloud.Personalization.AspNetCore.svg)](https://www.nuget.org/packages/KenticoCloud.Personalization.AspNetCore) KenticoCloud.Personalization.AspNetCore
+[![NuGet](https://img.shields.io/nuget/v/KenticoCloud.Personalization.MVC.svg)](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC) KenticoCloud.Personalization.MVC
+
+## Summary
+
 The Kentico Cloud Personalization .NET SDK is a library used for retrieving personalization information (such as visitor's first visit, activity on a website, etc.) from [Kentico Cloud](https://kenticocloud.com/). You can use the SDK in the form of a [NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization).
 
 ## Prerequisities
@@ -14,9 +21,11 @@ The **PersonalizationClient** class in the `KenticoCloud.Personalization` assemb
 
 ### Getting UserID and SessionID
 
-The `KenticoCloud.Personalization.MVC` assembly provides methods for retrieving the _User ID_ and _Session ID_ values. The values are retrieved using the `HttpRequest` object, which is generally available in ASP.NET applications. You can use the `KenticoCloud.Personalization.MVC` assembly in the form of a [NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC).
+_User ID_ and _Session ID_ of current visitor are saved in cookie. We are providing methods for retrieving these values.
 
-Note that you will need an ASP.NET Core MVC application to use the package.
+If you have ASP.NET MVC application use the [KenticoCloud.Personalization.MVC NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC) which contains extension methods for `HttpRequestBase` object, which is generally available in ASP.NET MVC applications.
+
+If you have ASP.NET Core application use the [KenticoCloud.Personalization.AspNetCore NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization.AspNetCore) which contains extension methods for `HttpRequest` object, which is generally available in ASP.NET Core applications.
 
 ### Basic querying examples
 
