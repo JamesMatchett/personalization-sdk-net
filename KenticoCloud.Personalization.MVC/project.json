@@ -8,8 +8,8 @@
   },
   "description": "Kentico Cloud Personalization MVC SDK enables you to connect your .NET applications to Kentico Cloud and retrieve content from your projects. For more information about Kentico Cloud, see https://kenticocloud.com/.",
   "frameworks": {
-    "netcoreapp1.0": {
-    }
+    "net451": {},
+    "netstandard1.6": {}
   },
   "language": "en-us",
   "packOptions": {
