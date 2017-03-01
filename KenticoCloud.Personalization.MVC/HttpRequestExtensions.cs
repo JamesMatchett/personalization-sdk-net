@@ -6,7 +6,7 @@ namespace KenticoCloud.Personalization.MVC
     /// <summary>
     /// Extension methods to provide access to Kentico Cloud Personalization IDs
     /// </summary>
-    public static class HttpRequestBaseExtensions
+    public static class HttpRequestExtensions
     {
         /// <summary>
         /// Gets the current UID from http request.

@@ -14,7 +14,7 @@ The **PersonalizationClient** class in the `KenticoCloud.Personalization` assemb
 
 ### Getting UserID and SessionID
 
-The `KenticoCloud.Personalization.MVC` assembly provides methods for retrieving the _User ID_ and _Session ID_ values. The values are retrieved using the `HttpRequestBase` object, which is generally available in ASP.NET applications. You can use the `KenticoCloud.Personalization.MVC` assembly in the form of a [NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC).
+The `KenticoCloud.Personalization.MVC` assembly provides methods for retrieving the _User ID_ and _Session ID_ values. The values are retrieved using the `HttpRequest` object, which is generally available in ASP.NET applications. You can use the `KenticoCloud.Personalization.MVC` assembly in the form of a [NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC).
 
 Note that you will need an ASP.NET Core MVC application to use the package.
 
