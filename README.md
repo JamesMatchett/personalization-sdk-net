@@ -21,27 +21,29 @@ The **PersonalizationClient** class in the `KenticoCloud.Personalization` assemb
 
 ### Getting UserID and SessionID
 
-_User ID_ and _Session ID_ of current visitor are saved in cookie. We are providing methods for retrieving these values.
+_User ID_ and _Session ID_ identify a specific visitor and his current session. These values are saved in a cookie and we provide methods to retrieve them in code.
 
-If you have ASP.NET MVC application use the [KenticoCloud.Personalization.MVC NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC) which contains extension methods for `HttpRequestBase` object, which is generally available in ASP.NET MVC applications.
-
-If you have ASP.NET Core application use the [KenticoCloud.Personalization.AspNetCore NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization.AspNetCore) which contains extension methods for `HttpRequest` object, which is generally available in ASP.NET Core applications.
+* If you have an ASP.NET MVC application, use the [KenticoCloud.Personalization.MVC](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC) NuGet package. This package provides extension methods for the `HttpRequestBase` object, which is generally available in ASP.NET MVC applications.
+* If you have an ASP.NET Core application, use the [KenticoCloud.Personalization.AspNetCore](https://www.nuget.org/packages/KenticoCloud.Personalization.AspNetCore) NuGet package. This packages provides extension methods for the `HttpRequest` object, which is generally available in ASP.NET Core applications.
 
 ### Basic querying examples
 
 Once you create the `PersonalizationClient` instance, you can start querying the Personalization API by calling methods on the class instance.
 
 ```C#
+// Retrieves usual location of a visitor
 var client = new PersonalizationClient("eyJh...5cCI");
 var location = await client.GetVisitorUsualLocationAsync("0f2a1fa152b8e92d");
 ```
 
 ```C#
+// Retrieves information about the first visit of a visitor
 var client = new PersonalizationClient("eyJh...5cCI");
 var visit = await client.GetFirstVisitAsync("0f2a1fa152b8e92d");
 ```
 
 ```C#
+// Retrieves information about the current session of a visitor
 var client = new PersonalizationClient("eyJh...5cCI");
 var session = await client.GetCurrentSessionAsync("0f2a1fa152b8e92d", "8d532785326b0258");
 ```
