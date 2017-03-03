@@ -48,7 +48,9 @@ var client = new PersonalizationClient("eyJh...5cCI");
 var session = await client.GetCurrentSessionAsync("0f2a1fa152b8e92d", "8d532785326b0258");
 ```
 
-### Example of use in MVC application
+### Example – use in ASP.NET MVC applications
+
+The following example shows how you can use the Personalization API in an ASP.NET MVC application to find out where the current visitor came from (i.e., their origin) before browsing on your website.
 
 ```C#
 using System.Threading.Tasks;
@@ -56,18 +58,23 @@ using System.Web.Mvc;
 using KenticoCloud.Personalization;
 using KenticoCloud.Personalization.MVC;
 
-namespace SDKWeb.Controllers
+namespace DancingGoat.Controllers
 {
     public class HomeController : Controller
     {
-        private static readonly PersonalizationClient PersonalizationClient = new PersonalizationClient("");
+        // Initializes an instance of the PersonalizationClient class
+        private static readonly PersonalizationClient PersonalizationClient = new PersonalizationClient("eyJh...5cCI");
 
         public async Task<ActionResult> Index()
         {
+            // Retrieves User ID and Session ID of the current visitor
             var uid = this.Request.GetCurrentPersonalizationUid();
             var sid = this.Request.GetCurrentPersonalizationSid();
+
+            // Retrieves the origin of the visitor's session
             var session = await PersonalizationClient.GetCurrentSessionAsync(uid, sid);
             ViewBag.PersonalizationSessionOrigin = session.Origin;
+
             return View();
         }
     }
