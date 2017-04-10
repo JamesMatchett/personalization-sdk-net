@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Kentico Cloud Personalization AspNetCore SDK enables you to connect your .NET applications to Kentico Cloud and retrieve content from your projects. For more information about Kentico Cloud, see https://kenticocloud.com/.</Description>
+    <Copyright>(c) 2016 Kentico Software. All rights reserved.</Copyright>
+    <AssemblyTitle>Kentico Cloud Personalization AspNetCore SDK</AssemblyTitle>
+    <NeutralLanguage>en-us</NeutralLanguage>
+    <Authors>Kentico Software</Authors>
+    <TargetFrameworks>net451;netstandard1.3</TargetFrameworks>
+    <AssemblyName>KenticoCloud.Personalization.AspNetCore</AssemblyName>
+    <PackageId>KenticoCloud.Personalization.AspNetCore</PackageId>
+    <PackageTags>kentico;mvc;aspnetcore;aspnetcoremvc</PackageTags>
+    <PackageIconUrl>http://kentico.com/favicon.ico</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Kentico/personalization-sdk-net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Kentico/personalization-sdk-net/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Kentico/personalization-sdk-net.git</RepositoryUrl>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

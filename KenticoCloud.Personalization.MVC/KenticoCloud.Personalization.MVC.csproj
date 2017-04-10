@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Kentico Cloud Personalization MVC SDK enables you to connect your .NET applications to Kentico Cloud and retrieve content from your projects. For more information about Kentico Cloud, see https://kenticocloud.com/.</Description>
+    <Copyright>(c) 2016 Kentico Software. All rights reserved.</Copyright>
+    <AssemblyTitle>Kentico Cloud Personalization MVC SDK</AssemblyTitle>
+    <NeutralLanguage>en-us</NeutralLanguage>
+    <Authors>Kentico Software</Authors>
+    <TargetFramework>net451</TargetFramework>
+    <AssemblyName>KenticoCloud.Personalization.MVC</AssemblyName>
+    <PackageId>KenticoCloud.Personalization.MVC</PackageId>
+    <PackageTags>kentico;mvc;aspnet;aspnetmvc</PackageTags>
+    <PackageIconUrl>http://kentico.com/favicon.ico</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Kentico/personalization-sdk-net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Kentico/personalization-sdk-net/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Kentico/personalization-sdk-net.git</RepositoryUrl>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System.Web" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>
