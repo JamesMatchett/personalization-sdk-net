@@ -6,6 +6,7 @@
     <AssemblyTitle>Kentico Cloud Personalization SDK</AssemblyTitle>
     <NeutralLanguage>en-us</NeutralLanguage>
     <Authors>Kentico Software</Authors>
+    <Title>Kentico Cloud Personalization SDK</Title>
     <TargetFrameworks>netstandard1.3;net451</TargetFrameworks>
     <AssemblyName>KenticoCloud.Personalization</AssemblyName>
     <PackageId>KenticoCloud.Personalization</PackageId>
@@ -30,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />

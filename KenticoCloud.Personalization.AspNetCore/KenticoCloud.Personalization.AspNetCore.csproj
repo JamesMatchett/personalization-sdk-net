@@ -4,6 +4,7 @@
     <Description>Kentico Cloud Personalization AspNetCore SDK enables you to connect your .NET applications to Kentico Cloud and retrieve content from your projects. For more information about Kentico Cloud, see https://kenticocloud.com/.</Description>
     <Copyright>(c) 2016 Kentico Software. All rights reserved.</Copyright>
     <AssemblyTitle>Kentico Cloud Personalization AspNetCore SDK</AssemblyTitle>
+    <Title>Kentico Cloud Personalization AspNetCore SDK</Title>
     <NeutralLanguage>en-us</NeutralLanguage>
     <Authors>Kentico Software</Authors>
     <TargetFrameworks>net451;netstandard1.3</TargetFrameworks>
