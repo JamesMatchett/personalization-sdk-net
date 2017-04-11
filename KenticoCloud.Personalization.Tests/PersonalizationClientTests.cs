@@ -71,5 +71,11 @@ namespace KenticoCloud.Personalization.Tests
                 PageUrl = "/"
             });
         }
+
+        [Test]
+        public async Task GetVisitorSegmentsAsync()
+        {
+            var r = await _client.GetVisitorSegmentsAsync(_uid);
+        }
     }
 }

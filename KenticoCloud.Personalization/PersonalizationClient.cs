@@ -176,6 +176,20 @@ namespace KenticoCloud.Personalization
             return await GetResponseAsync<ActivityResponse>(url.ToString());
         }
 
+        /// <summary>
+        /// Gets segments in which user specified by <paramref name="uid"/> currently is.
+        /// </summary>
+        /// <param name="uid">User ID.</param>
+        public async Task<SegmentsResponse> GetVisitorSegmentsAsync(string uid)
+        {
+            if (string.IsNullOrEmpty(uid))
+            {
+                throw new ArgumentException("Uid must be set.", nameof(uid));
+            }
+
+            return await GetResponseAsync<SegmentsResponse>($"{VisitorApiRoutePrefix}/{uid}/segments");
+        }
+
         private async Task<T> GetResponseAsync<T>(string url)
         {
             using (var response = await _httpClient.GetAsync(url))
