@@ -12,8 +12,8 @@ namespace KenticoCloud.Personalization.Tests
 
         public PersonalizationClientTests()
         {
-            _uid = "88-9a2c-cdefb89a46ef";
-            _sid = "0d-a495-89bb29e6c18a";
+            _uid = "9a2ccdefb89a46ef";
+            _sid = "a49589bb29e6c18a";
             var apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ1c3JfMHZRWm12OHFYcUpmSWhzZmRUVW1FViIsInBpZCI6IjQ2MjUxN2NlLTlkYmYtNDRmMC1hNTdiLTIyYjlkNTA3NDdmZCIsImp0aSI6Ing5TjVURGJqd1BCdUZ5bXIiLCJhdWQiOiJlbmdhZ2UtYXBpLmtlbnRpY29jbG91ZC5jb20ifQ.IvaiOpLYs-UW54l2sagxkDH6VwynZX8G4D4Yx-wYTjw";
             _client = new PersonalizationClient(apiKey);
         }
@@ -99,7 +99,7 @@ namespace KenticoCloud.Personalization.Tests
         public async Task GetVisitorSegmentsAsync()
         {
             var r = await _client.GetVisitorSegmentsAsync(_uid);
-            Assert.AreEqual(0, r.Segments.Length);
+            Assert.AreEqual(1, r.Segments.Length);
         }
     }
 }
