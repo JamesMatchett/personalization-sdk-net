@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace KenticoCloud.Personalization.Tests
 {
+    [TestFixture]
     public class TrackingClientTests
     {
         private TrackingClient _client;
@@ -27,12 +28,6 @@ namespace KenticoCloud.Personalization.Tests
         {
             string sid = await _client.RecordNewSession("462517ce9dbf44f0");
             StringAssert.IsMatch("^[A-Za-z0-9]{16}$", sid);
-        }
-
-        [Test]
-        public void GenerateRandomRawId_GeneratesCorrectId()
-        {
-            StringAssert.IsMatch("^[A-Za-z0-9]{16}$", _client.GenerateRandomRawId());
         }
     }
 }

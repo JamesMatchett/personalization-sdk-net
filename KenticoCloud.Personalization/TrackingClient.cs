@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,7 +15,7 @@ namespace KenticoCloud.Personalization
     {
         private readonly Guid _projectId;
         private readonly HttpClient _httpClient;
-        private readonly SHA1 _sha1Manager = SHA1.Create();
+        private readonly RandomIdGenerator _randomIdGenerator = new RandomIdGenerator();
 
         private const string VisitorApiRoutePrefix = "api/v1/track";
 
@@ -37,17 +35,6 @@ namespace KenticoCloud.Personalization
         }
 
         /// <summary>
-        /// Generates an alphanumeric 16 characters long random ID.
-        /// </summary>
-        /// <returns>Generated ID</returns>
-        public string GenerateRandomRawId()
-        {
-            var sha1 = _sha1Manager.ComputeHash(Guid.NewGuid().ToByteArray());
-
-            return GetStringFromByteArray(sha1).Substring(0,16);
-        }
-
-        /// <summary>
         /// Records start of a new session for the visitor and returns ID of the recorded session.
         /// </summary>
         /// <param name="uid">ID of the tracked visitor</param>
@@ -64,7 +51,7 @@ namespace KenticoCloud.Personalization
                 throw new ArgumentException("Uid format is invalid.");
             }
 
-            string sid = GenerateRandomRawId();
+            string sid = _randomIdGenerator.Generate();
 
             await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/session", uid, sid);
 
@@ -80,7 +67,8 @@ namespace KenticoCloud.Personalization
                 { "sid", sid }
             };
 
-            using (var response = await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json")))
+            using (var response = await _httpClient.PostAsync(url,
+                new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json")))
             {
                 var responseBody = await response.Content.ReadAsStringAsync();
 
@@ -89,15 +77,6 @@ namespace KenticoCloud.Personalization
                     throw new PersonalizationException(response.StatusCode, responseBody);
                 }
             }
-        }
-
-        private string GetStringFromByteArray(IEnumerable<byte> bytes)
-        {
-            var sb = new StringBuilder();
-
-            bytes.ToList().ForEach(b => sb.Append(b.ToString("x2")));
-
-            return sb.ToString();
         }
     }
 }
