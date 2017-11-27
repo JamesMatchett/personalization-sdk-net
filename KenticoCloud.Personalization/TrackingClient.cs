@@ -40,6 +40,8 @@ namespace KenticoCloud.Personalization
         /// </summary>
         /// <param name="uid">ID of the tracked visitor</param>
         /// <returns>ID of the created session</returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="uid"/> is invalid.</exception>
+        /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
         public async Task<string> RecordNewSession(string uid)
         {
             ValidateIdParameter(uid);
@@ -64,6 +66,8 @@ namespace KenticoCloud.Personalization
         /// <param name="uid">ID of the tracked visitor</param>
         /// <param name="sid">ID of the session this activity belongs to</param>
         /// <param name="activityName">Name of the activity</param>
+        /// <exception cref="ArgumentException">Thrown when some of the arguments are invalid.</exception>
+        /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
         public async Task RecordActivity(string uid, string sid, string activityName)
         {
             ValidateIdParameter(uid);
@@ -90,6 +94,8 @@ namespace KenticoCloud.Personalization
         /// <param name="sid">ID of the session this activity belongs to</param>
         /// <param name="email"></param>
         /// <returns>Status code for the performed request</returns>
+        /// <exception cref="ArgumentException">Thrown when some of the arguments are invalid.</exception>
+        /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
         public async Task<HttpStatusCode> RecordVisitorEmail(string uid, string sid, string email)
         {
             ValidateIdParameter(uid);
