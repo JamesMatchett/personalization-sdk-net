@@ -70,7 +70,7 @@ namespace KenticoCloud.Personalization
             ValidateIdParameter(sid);
             if (string.IsNullOrEmpty(activityName))
             {
-                throw new ArgumentException("message", nameof(activityName));
+                throw new ArgumentException("Name of the activity must be set", nameof(activityName));
             }
 
             var postContent = new Dictionary<string, string>
