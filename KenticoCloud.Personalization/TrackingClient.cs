@@ -44,7 +44,7 @@ namespace KenticoCloud.Personalization
         /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
         public async Task<string> RecordNewSession(string uid)
         {
-            ValidateIdParameter(uid);
+            ValidateIdParameter(uid, nameof(uid));
 
             string sid = _randomIdGenerator.Generate();
 
@@ -70,8 +70,8 @@ namespace KenticoCloud.Personalization
         /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
         public async Task RecordActivity(string uid, string sid, string activityName)
         {
-            ValidateIdParameter(uid);
-            ValidateIdParameter(sid);
+            ValidateIdParameter(uid, nameof(uid));
+            ValidateIdParameter(sid, nameof(sid));
             if (string.IsNullOrEmpty(activityName))
             {
                 throw new ArgumentException("Name of the activity must be set", nameof(activityName));
@@ -98,8 +98,8 @@ namespace KenticoCloud.Personalization
         /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
         public async Task<HttpStatusCode> RecordVisitorEmail(string uid, string sid, string email)
         {
-            ValidateIdParameter(uid);
-            ValidateIdParameter(sid);
+            ValidateIdParameter(uid, nameof(uid));
+            ValidateIdParameter(sid, nameof(sid));
             if (string.IsNullOrEmpty(email))
             {
                 throw new ArgumentException("Email must be set", nameof(email));
@@ -131,16 +131,16 @@ namespace KenticoCloud.Personalization
             }
         }
 
-        private void ValidateIdParameter(string uid)
+        private void ValidateIdParameter(string value, string name)
         {
-            if (string.IsNullOrEmpty(uid))
+            if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentException("Uid must be set.", nameof(uid));
+                throw new ArgumentException($"Parameter {name} must be set.", name);
             }
 
-            if (!Regex.IsMatch(uid, @"^[a-zA-Z0-9]{16}$"))
+            if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]{16}$"))
             {
-                throw new ArgumentException("Uid format is invalid.");
+                throw new ArgumentException($"Format of the {name} parameter is invalid.");
             }
         }
     }
