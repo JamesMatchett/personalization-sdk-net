@@ -83,7 +83,33 @@ namespace KenticoCloud.Personalization
             await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/activity", postContent);
         }
 
-        private async Task PerformTrackingRequestAsync(string url, Dictionary<string, string> requestContent)
+        /// <summary>
+        /// Records visitor's email to its contact profile.
+        /// </summary>
+        /// <param name="uid">ID of the tracked visitor</param>
+        /// <param name="sid">ID of the session this activity belongs to</param>
+        /// <param name="email"></param>
+        /// <returns>Status code for the performed request</returns>
+        public async Task<HttpStatusCode> RecordVisitorEmail(string uid, string sid, string email)
+        {
+            ValidateIdParameter(uid);
+            ValidateIdParameter(sid);
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("Email must be set", nameof(email));
+            }
+
+            var postContent = new Dictionary<string, string>
+            {
+                { "uid", uid },
+                { "sid", sid },
+                { "email", email }
+            };
+
+            return await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/contact", postContent);
+        }
+
+        private async Task<HttpStatusCode> PerformTrackingRequestAsync(string url, Dictionary<string, string> requestContent)
         {
             using (var response = await _httpClient.PostAsync(url,
                 new StringContent(JsonConvert.SerializeObject(requestContent), Encoding.UTF8, "application/json")))
@@ -94,6 +120,8 @@ namespace KenticoCloud.Personalization
                 {
                     throw new PersonalizationException(response.StatusCode, responseBody);
                 }
+
+                return response.StatusCode;
             }
         }
 

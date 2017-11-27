@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 
 namespace KenticoCloud.Personalization.Tests
@@ -9,6 +11,7 @@ namespace KenticoCloud.Personalization.Tests
     {
         private const string TEST_UID = "462517ce9dbf44f0";
         private const string TEST_ACTIVITY_NAME = "SDKTestActivity";
+        private const string TEST_EMAIL = "sdkEmail@personalizationSDK.local";
         private TrackingClient _client;
 
         [SetUp]
@@ -59,6 +62,40 @@ namespace KenticoCloud.Personalization.Tests
         {
             string sid = await _client.RecordNewSession(TEST_UID);
             Assert.DoesNotThrowAsync(async () => await _client.RecordActivity(TEST_UID, sid, TEST_ACTIVITY_NAME));
+        }
+
+        [TestCase(null)]
+        [TestCase("abcde12345678$|a")]
+        public void RecordVisitorEmail_ThrowsForIncorrectUid(string uid)
+        {
+            string validSid = "562517ce9dbf44f0";
+            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitorEmail(uid, validSid, TEST_EMAIL));
+        }
+
+        [TestCase(null)]
+        [TestCase("abcde12345678$|a")]
+        public void RecordVisitorEmail_ThrowsForIncorrectSid(string sid)
+        {
+            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitorEmail(TEST_UID, sid, TEST_EMAIL));
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        public void RecordVisitorEmail_ThrowsForBadEmail(string email)
+        {
+            string validSid = "562517ce9dbf44f0";
+            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitorEmail(TEST_UID, validSid, email));
+        }
+
+        [Test]
+        public async Task RecordVisitorEmail_IsCorrectlyLogged()
+        {
+            string uid = new RandomIdGenerator().Generate();
+            string sid = await _client.RecordNewSession(uid);
+
+            var responseCode = await _client.RecordVisitorEmail(uid, sid, TEST_EMAIL);
+
+            Assert.That(responseCode, Is.EqualTo(HttpStatusCode.OK));
         }
     }
 }
