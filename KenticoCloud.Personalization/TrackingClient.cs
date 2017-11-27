@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -41,6 +42,63 @@ namespace KenticoCloud.Personalization
         /// <returns>ID of the created session</returns>
         public async Task<string> RecordNewSession(string uid)
         {
+            ValidateIdParameter(uid);
+
+            string sid = _randomIdGenerator.Generate();
+
+            var postContent =new Dictionary<string, string>
+            {
+                { "uid", uid },
+                { "sid", sid }
+            };
+
+            await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/session", postContent);
+
+            return sid;
+        }
+
+        /// <summary>
+        /// Records custom activity for the visitor in the given session. 
+        /// Activity of the given <paramref name="activityName"/> must be defined in Kentico Cloud application otherwise activity won't be logged.
+        /// </summary>
+        /// <param name="uid">ID of the tracked visitor</param>
+        /// <param name="sid">ID of the session this activity belongs to</param>
+        /// <param name="activityName">Name of the activity</param>
+        public async Task RecordActivity(string uid, string sid, string activityName)
+        {
+            ValidateIdParameter(uid);
+            ValidateIdParameter(sid);
+            if (string.IsNullOrEmpty(activityName))
+            {
+                throw new ArgumentException("message", nameof(activityName));
+            }
+
+            var postContent = new Dictionary<string, string>
+            {
+                { "uid", uid },
+                { "sid", sid },
+                { "name", activityName }
+            };
+
+            await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/activity", postContent);
+        }
+
+        private async Task PerformTrackingRequestAsync(string url, Dictionary<string, string> requestContent)
+        {
+            using (var response = await _httpClient.PostAsync(url,
+                new StringContent(JsonConvert.SerializeObject(requestContent), Encoding.UTF8, "application/json")))
+            {
+                var responseBody = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new PersonalizationException(response.StatusCode, responseBody);
+                }
+            }
+        }
+
+        private void ValidateIdParameter(string uid)
+        {
             if (string.IsNullOrEmpty(uid))
             {
                 throw new ArgumentException("Uid must be set.", nameof(uid));
@@ -49,33 +107,6 @@ namespace KenticoCloud.Personalization
             if (!Regex.IsMatch(uid, @"^[a-zA-Z0-9]{16}$"))
             {
                 throw new ArgumentException("Uid format is invalid.");
-            }
-
-            string sid = _randomIdGenerator.Generate();
-
-            await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/session", uid, sid);
-
-            return sid;
-        }
-
-
-        private async Task PerformTrackingRequestAsync(string url, string uid, string sid)
-        {
-            var content = new Dictionary<string, string>
-            {
-                { "uid", uid },
-                { "sid", sid }
-            };
-
-            using (var response = await _httpClient.PostAsync(url,
-                new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json")))
-            {
-                var responseBody = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new PersonalizationException(response.StatusCode, responseBody);
-                }
             }
         }
     }
