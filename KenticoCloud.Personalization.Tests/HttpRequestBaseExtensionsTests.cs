@@ -22,7 +22,7 @@ namespace KenticoCloud.Personalization.Tests
         public void GetSidFromHttpContextTest()
         {
             var context = Substitute.For<HttpRequest>();
-            var cookies = new RequestCookieCollection(new Dictionary<string, string>() { { "k_e_ses.whatever", $"whatever.{_sid}" } });
+            var cookies = new RequestCookieCollection(new Dictionary<string, string>() { { "k_e_id.whatever", $"whatever.{_sid}" } });
             context.Cookies.Returns(cookies);
 
             Assert.AreEqual(_sid, context.GetCurrentPersonalizationSid());
