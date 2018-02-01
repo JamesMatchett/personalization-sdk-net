@@ -11,6 +11,7 @@ namespace KenticoCloud.Personalization.Tests
         private const string TEST_UID = "462517ce9dbf44f0";
         private const string TEST_ACTIVITY_NAME = "SDKTestActivity";
         private const string TEST_EMAIL = "sdkEmail@personalizationSDK.local";
+        private const string INVALID_UID = "abcde12345678aA5A78935";
         private TrackingClient _client;
 
         [SetUp]
@@ -20,7 +21,7 @@ namespace KenticoCloud.Personalization.Tests
         }
 
         [TestCase(null)]
-        [TestCase("abcde12345678$|a")]
+        [TestCase(INVALID_UID)]
         public void RecordNewSession_ThrowsForIncorrectUid(string uid)
         {
             Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordNewSession(uid));
@@ -34,7 +35,7 @@ namespace KenticoCloud.Personalization.Tests
         }
 
         [TestCase(null)]
-        [TestCase("abcde12345678$|a")]
+        [TestCase(INVALID_UID)]
         public void RecordActivity_ThrowsForIncorrectUid(string uid)
         {
             string validSid = "562517ce9dbf44f0";
@@ -64,7 +65,7 @@ namespace KenticoCloud.Personalization.Tests
         }
 
         [TestCase(null)]
-        [TestCase("abcde12345678$|a")]
+        [TestCase(INVALID_UID)]
         public void RecordVisitorEmail_ThrowsForIncorrectUid(string uid)
         {
             string validSid = "562517ce9dbf44f0";
