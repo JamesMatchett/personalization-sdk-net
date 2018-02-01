@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace KenticoCloud.Personalization.Tests
 {
+    [TestFixture]
     public class PersonalizationClientTests
     {
         private readonly string _uid;
