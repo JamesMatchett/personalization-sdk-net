@@ -163,7 +163,7 @@ namespace KenticoCloud.Personalization
 
             if (value.Length > UID_MAX_LENGTH)
             {
-                throw new ArgumentException($"Format of the {name} parameter is invalid.");
+                throw new ArgumentException($"Format of the {name} parameter is invalid. Should have maximum length of {UID_MAX_LENGTH}");
             }
         }
     }
