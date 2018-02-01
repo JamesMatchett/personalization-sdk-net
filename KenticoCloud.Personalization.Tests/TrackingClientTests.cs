@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 
 namespace KenticoCloud.Personalization.Tests
@@ -69,14 +68,14 @@ namespace KenticoCloud.Personalization.Tests
         public void RecordVisitorEmail_ThrowsForIncorrectUid(string uid)
         {
             string validSid = "562517ce9dbf44f0";
-            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitorEmail(uid, validSid, TEST_EMAIL));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitor(uid, validSid, new Contact(){ Email = TEST_EMAIL }));
         }
 
         [TestCase(null)]
         [TestCase("abcde12345678$|a")]
         public void RecordVisitorEmail_ThrowsForIncorrectSid(string sid)
         {
-            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitorEmail(TEST_UID, sid, TEST_EMAIL));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitor(TEST_UID, sid, new Contact() { Email = TEST_EMAIL }));
         }
 
         [TestCase(null)]
@@ -84,7 +83,7 @@ namespace KenticoCloud.Personalization.Tests
         public void RecordVisitorEmail_ThrowsForBadEmail(string email)
         {
             string validSid = "562517ce9dbf44f0";
-            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitorEmail(TEST_UID, validSid, email));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _client.RecordVisitor(TEST_UID, validSid, new Contact() { Email = email }));
         }
 
         [Test]
@@ -93,7 +92,7 @@ namespace KenticoCloud.Personalization.Tests
             string uid = new RandomIdGenerator().Generate();
             string sid = await _client.RecordNewSession(uid);
 
-            var responseCode = await _client.RecordVisitorEmail(uid, sid, TEST_EMAIL);
+            var responseCode = await _client.RecordVisitor(uid, sid, new Contact() { Email = TEST_EMAIL, Company = "Testing inc.", Name = "Max Testing", Phone = "123456789"});
 
             Assert.That(responseCode, Is.EqualTo(HttpStatusCode.OK));
         }

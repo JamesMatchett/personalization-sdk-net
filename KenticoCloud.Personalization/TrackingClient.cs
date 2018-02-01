@@ -28,7 +28,12 @@ namespace KenticoCloud.Personalization
         {
         }
 
-        internal TrackingClient(string endpointUri, Guid projectId)
+        /// <summary>
+        /// Client constructor for production API.
+        /// </summary>
+        /// <param name="endpointUri"></param>
+        /// <param name="projectId"></param>
+        public TrackingClient(string endpointUri, Guid projectId)
         {
             _projectId = projectId;
 
@@ -88,28 +93,32 @@ namespace KenticoCloud.Personalization
         }
 
         /// <summary>
-        /// Records visitor's email to its contact profile.
+        /// Records visitor's information to its contact profile.
         /// </summary>
         /// <param name="uid">ID of the tracked visitor</param>
         /// <param name="sid">ID of the session this activity belongs to</param>
-        /// <param name="email"></param>
+        /// <param name="contact">Visitor's information</param>
         /// <returns>Status code for the performed request</returns>
         /// <exception cref="ArgumentException">Thrown when some of the arguments are invalid.</exception>
         /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
-        public async Task<HttpStatusCode> RecordVisitorEmail(string uid, string sid, string email)
+        public async Task<HttpStatusCode> RecordVisitor(string uid, string sid, Contact contact)
         {
             ValidateIdParameter(uid, nameof(uid));
             ValidateIdParameter(sid, nameof(sid));
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(contact.Email))
             {
-                throw new ArgumentException("Email must be set", nameof(email));
+                throw new ArgumentException("Email must be set", nameof(contact));
             }
 
             var postContent = new Dictionary<string, string>
             {
                 { "uid", uid },
                 { "sid", sid },
-                { "email", email }
+                { "email", contact.Email },
+                { "company", contact.Company },
+                { "name", contact.Name },
+                { "phone", contact.Phone },
+                { "website", contact.Website },
             };
 
             return await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/contact", postContent);
