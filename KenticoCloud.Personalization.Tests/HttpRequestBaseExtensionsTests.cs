@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace KenticoCloud.Personalization.Tests
 {
+    [TestFixture]
     public class HttpRequestBaseExtensionsTests
     {
         public HttpRequestBaseExtensionsTests()

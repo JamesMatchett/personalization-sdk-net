@@ -16,7 +16,7 @@ namespace KenticoCloud.Personalization
         private const string VisitorApiRoutePrefix = "v1/visitor";
 
         /// <summary>
-        /// Client consturctor for production API.
+        /// Client constructor for production API.
         /// </summary>
         /// <param name="accessToken"></param>
         public PersonalizationClient(string accessToken) 
