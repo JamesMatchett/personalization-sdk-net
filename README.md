@@ -86,7 +86,7 @@ namespace DancingGoat.Controllers
 }
 ```
 
-See [Creating personalization variants](https://github.com/Kentico/personalization-sdk-net/wiki/Creating-personalization-variants) in the wiki for a more detailed explanation of delivering different content to different visitors.
+See [Personalizing content](https://developer.kenticocloud.com/docs/personalizing-content) in our DevHub for a more detailed explanation of delivering different content to different visitors.
 
 ## Feedback & Contributing
 Check out the [contributing](https://github.com/Kentico/personalization-sdk-net/blob/master/CONTRIBUTING.md) page to see the best places to file issues, start discussions and begin contributing.

@@ -26,7 +26,7 @@ namespace KenticoCloud.Personalization.MVC
         /// <param name="request">Request from which the SID is parsed.</param>
         public static string GetCurrentPersonalizationSid(this HttpRequestBase request)
         {
-            var cookieKey = request.Cookies.AllKeys.FirstOrDefault(x => x.StartsWith("k_e_ses"));
+            var cookieKey = request.Cookies.AllKeys.FirstOrDefault(x => x.StartsWith("k_e_id"));
             return !string.IsNullOrEmpty(cookieKey)
                 ? request.Cookies[cookieKey]?.Value.Split('.').LastOrDefault()
                 : null;
