@@ -8,9 +8,9 @@ namespace KenticoCloud.Personalization
     public class Segment
     {
         /// <summary>
-        /// Name of the segment.
+        /// Codename of the segment.
         /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("codename")]
+        public string Codename { get; set; }
     }
 }
