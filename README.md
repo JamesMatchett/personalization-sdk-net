@@ -18,7 +18,7 @@ The Kentico Cloud Personalization .NET SDK is a library used for retrieving pers
 
 To retrieve data from Kentico Cloud via the Personalization API, you need to have a Kentico Cloud subscription at <https://app.kenticocloud.com>. For more information see our [documentation](http://help.kenticocloud.com/).
 
-## Basic scenarios
+## Basic personalization scenarios
 
 ### Create PersonalizationClient instance
 
@@ -36,26 +36,20 @@ _User ID_ and _Session ID_ identify a specific visitor and his current session. 
 Once you create the `PersonalizationClient` instance, you can start querying the Personalization API by calling methods on the class instance.
 
 ```C#
-// Retrieves usual location of a visitor
+// Retrieves segments of a visitor
 var client = new PersonalizationClient("eyJh...5cCI");
-var location = await client.GetVisitorUsualLocationAsync("0f2a1fa152b8e92d");
+var visitorSegments = await client.GetVisitorSegmentsAsync("0f2a1fa152b8e92d");
 ```
 
 ```C#
-// Retrieves information about the first visit of a visitor
+// Retrieves all visitors belonging to a segment
 var client = new PersonalizationClient("eyJh...5cCI");
-var visit = await client.GetFirstVisitAsync("0f2a1fa152b8e92d");
-```
-
-```C#
-// Retrieves information about the current session of a visitor
-var client = new PersonalizationClient("eyJh...5cCI");
-var session = await client.GetCurrentSessionAsync("0f2a1fa152b8e92d", "8d532785326b0258");
+var visit = await client.GetVisitorsInSegmentAsync("potential_partners");
 ```
 
 ### Example – use in ASP.NET MVC applications
 
-The following example shows how you can use the Personalization API in an ASP.NET MVC application to find out where the current visitor came from (i.e., their origin) before browsing on your website.
+The following example shows how you can use the Personalization API in an ASP.NET MVC application to find out if the current visitor belongs to a *Potential job candidates* segment.
 
 ```C#
 using System.Threading.Tasks;
@@ -68,17 +62,16 @@ namespace DancingGoat.Controllers
     public class HomeController : Controller
     {
         // Initializes an instance of the PersonalizationClient class
-        private static readonly PersonalizationClient PersonalizationClient = new PersonalizationClient("eyJh...5cCI");
+        private static readonly PersonalizationClient PersonalizationClient = new PersonalizationClient(<YOUR_API_KEY);
 
         public async Task<ActionResult> Index()
         {
-            // Retrieves User ID and Session ID of the current visitor
+            // Retrieves User ID of the current visitor
             var uid = this.Request.GetCurrentPersonalizationUid();
-            var sid = this.Request.GetCurrentPersonalizationSid();
 
-            // Retrieves the origin of the visitor's session
-            var session = await PersonalizationClient.GetCurrentSessionAsync(uid, sid);
-            ViewBag.PersonalizationSessionOrigin = session.Origin;
+            // Retrieves segments of the visitor
+            SegmentsResponse response = await client.GetVisitorSegmentsAsync(uid);
+            ViewBag.VisitorSegments = response.segments;
 
             return View();
         }
@@ -87,6 +80,53 @@ namespace DancingGoat.Controllers
 ```
 
 See [Personalizing content](https://developer.kenticocloud.com/docs/personalizing-content) in our DevHub for a more detailed explanation of delivering different content to different visitors.
+
+## Actively tracking visitors
+
+Our [Tracking API](https://developer.kenticocloud.com/reference#tracking-api-beta) is a write-only REST API that allows you to track your users or visitors directly, without the use of our JavaScript [tracking code](https://developer.kenticocloud.com/docs/enable-tracking). You can use it, for example, to track users in your mobile application.
+
+### Creating TrackingClient instance
+
+The **TrackingClient** class in the `KenticoCloud.Personalization` assembly enables you to send information about your visitors or users to Kentico Cloud. At this time, it doesn't require the use of your Personalization API Key. You only need to pass it your [Project Id](https://developer.kenticocloud.com/docs/using-delivery-api#section-getting-project-id). 
+
+#### Recording a session
+
+```C#
+// Records new session of a specified visitor, generates session ID automatically (and returns it)
+var client = new TrackingClient("https://engage-ket.kenticocloud.com", Guid.Parse("38af179c-40ba-42e7-a5ca-33b8cdcc0d45"));
+string uid = "7899852211af00000";
+sid = client.RecordNewSession(uid);
+```
+
+#### Recording a custom activity
+
+```C#
+// Records custom activity of a specified visitor during the specified session
+var client = new TrackingClient("https://engage-ket.kenticocloud.com", Guid.Parse("38af179c-40ba-42e7-a5ca-33b8cdcc0d45"));
+string uid = "1111136b4af00000";
+string sid = "7899852211af0000";
+string activityName = "Clicked facebook icon";
+
+client.RecordActivity(uid, sid, activityName);
+```
+
+#### Recording email and other information about a visitor
+
+```C#
+// Records information about the specified visitor
+var client = new TrackingClient("https://engage-ket.kenticocloud.com", Guid.Parse("38af179c-40ba-42e7-a5ca-33b8cdcc0d45"));
+string uid = "1111136b4af00000";
+string sid = "7899852211af00000;
+Contant contact = new Contact {
+    Email = "johnsmith@gmail.com",
+    Company = "Alphabet",
+    Name = "John Smith",
+    Phone = "555-888-777",
+    Website = "johnsmith.blog.com"    
+}
+
+client.RecordVisitor(uid, sid, contact);
+```
 
 ## Feedback & Contributing
 Check out the [contributing](https://github.com/Kentico/personalization-sdk-net/blob/master/CONTRIBUTING.md) page to see the best places to file issues, start discussions and begin contributing.
