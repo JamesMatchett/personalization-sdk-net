@@ -14,7 +14,7 @@
 
 The Kentico Cloud Personalization .NET SDK is a library used for retrieving personalization information (such as visitor's first visit, activity on a website, etc.) from [Kentico Cloud](https://kenticocloud.com/). You can use the SDK in the form of a [NuGet package](https://www.nuget.org/packages/KenticoCloud.Personalization).
 
-## Prerequisities
+## Prerequisites
 
 To retrieve data from Kentico Cloud via the Personalization API, you need to have a Kentico Cloud subscription at <https://app.kenticocloud.com>. For more information see our [documentation](http://help.kenticocloud.com/).
 
@@ -22,14 +22,14 @@ To retrieve data from Kentico Cloud via the Personalization API, you need to hav
 
 ### Create PersonalizationClient instance
 
-The **PersonalizationClient** class in the `KenticoCloud.Personalization` assembly is the main class of the SDK that enables you to query the API. To create an instance of the class, you need to provide your **personalization API key**. You can find the key in the Development section of Kentico Cloud.
+The **PersonalizationClient** class in the `KenticoCloud.Personalization` assembly is the main class of the SDK that enables you to query the API. To create an instance of the class, you need to provide your **personalization API key**. You can find the key in the API Keys section of Kentico Cloud.
 
 ### Getting UserID and SessionID
 
 _User ID_ and _Session ID_ identify a specific visitor and his current session. These values are saved in a cookie and we provide methods to retrieve them in code.
 
 * If you have an ASP.NET MVC application, use the [KenticoCloud.Personalization.MVC](https://www.nuget.org/packages/KenticoCloud.Personalization.MVC) NuGet package. This package provides extension methods for the `HttpRequestBase` object, which is generally available in ASP.NET MVC applications.
-* If you have an ASP.NET Core application, use the [KenticoCloud.Personalization.AspNetCore](https://www.nuget.org/packages/KenticoCloud.Personalization.AspNetCore) NuGet package. This packages provides extension methods for the `HttpRequest` object, which is generally available in ASP.NET Core applications.
+* If you have an ASP.NET Core application, use the [KenticoCloud.Personalization.AspNetCore](https://www.nuget.org/packages/KenticoCloud.Personalization.AspNetCore) NuGet package. This package provides extension methods for the `HttpRequest` object, which is generally available in ASP.NET Core applications.
 
 ### Basic querying examples
 
@@ -49,7 +49,7 @@ var visit = await client.GetVisitorsInSegmentAsync("potential_partners");
 
 ### Example – use in ASP.NET MVC applications
 
-The following example shows how you can use the Personalization API in an ASP.NET MVC application to find out if the current visitor belongs to a *Potential job candidates* segment.
+The following example shows how you can use the Personalization API in an ASP.NET MVC application to find out which segments the current visitor belongs to. This information can then be used to personalize content shown to the visitor.
 
 ```C#
 using System.Threading.Tasks;
@@ -105,9 +105,9 @@ sid = client.RecordNewSession(uid);
 var client = new TrackingClient("https://engage-ket.kenticocloud.com", Guid.Parse("38af179c-40ba-42e7-a5ca-33b8cdcc0d45"));
 string uid = "1111136b4af00000";
 string sid = "7899852211af0000";
-string activityName = "Clicked facebook icon";
+string activityCodename = "Clicked_facebook_icon";
 
-client.RecordActivity(uid, sid, activityName);
+client.RecordActivity(uid, sid, activityCodename);
 ```
 
 #### Recording email and other information about a visitor
