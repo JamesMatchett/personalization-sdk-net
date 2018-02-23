@@ -87,7 +87,7 @@ Our [Tracking API](https://developer.kenticocloud.com/reference#tracking-api-bet
 
 ### Creating TrackingClient instance
 
-The **TrackingClient** class in the `KenticoCloud.Personalization` assembly enables you to send information about your visitors or users to Kentico Cloud. At this time, it doesn't require the use of your Personalization API Key. You only need to pass it your [Project Id](https://developer.kenticocloud.com/docs/using-delivery-api#section-getting-project-id). 
+The **TrackingClient** class in the `KenticoCloud.Personalization` assembly enables you to send information about your visitors or users to Kentico Cloud. At this time, it doesn't require the use of your Personalization API Key. You only need to pass it your [Project Id](https://developer.kenticocloud.com/v1/docs/getting-content#section-getting-content-items).
 
 #### Recording a session
 
