@@ -14,15 +14,17 @@ namespace KenticoCloud.Personalization
     public class PersonalizationClient
     {
         private readonly HttpClient _httpClient;
-        private const string VisitorApiRoutePrefix = "v1/visitor";
-        private const string SegmentApiRoutePrefix = "v1/segment";
+
+        private readonly string _visitorApiRoutePrefix;
+        private readonly string _segmentApiRoutePrefix;
 
         /// <summary>
         /// Client constructor for production API.
         /// </summary>
         /// <param name="accessToken"></param>
-        public PersonalizationClient(string accessToken)
-            : this("https://engage-api.kenticocloud.com", accessToken)
+        /// <param name="projectId"></param>
+        public PersonalizationClient(string accessToken, Guid projectId)
+            : this("https://engage-api.kenticocloud.com", accessToken, projectId)
         {
         }
 
@@ -31,9 +33,13 @@ namespace KenticoCloud.Personalization
         /// </summary>
         /// <param name="endpointUri">Root url of API endpoint.</param>
         /// <param name="accessToken">Your personalization API key. It can be found on Kentico Cloud Developer page.</param>
-        public PersonalizationClient(string endpointUri, string accessToken)
+        /// <param name="projectId">Your project identifier.</param>
+        public PersonalizationClient(string endpointUri, string accessToken, Guid projectId)
         {
-            _httpClient = new HttpClient() { BaseAddress = new Uri(endpointUri) };
+            _segmentApiRoutePrefix = $"v2/segment/{projectId}";
+            _visitorApiRoutePrefix = $"v2/visitor/{projectId}";
+
+            _httpClient = new HttpClient { BaseAddress = new Uri(endpointUri) };
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
@@ -49,7 +55,7 @@ namespace KenticoCloud.Personalization
             {
                 throw new ArgumentException("Uid must be set.", nameof(uid));
             }
-            using (var response = await _httpClient.GetAsync($"{VisitorApiRoutePrefix}/{uid}/segments"))
+            using (var response = await _httpClient.GetAsync($"{_visitorApiRoutePrefix}/{uid}/segments"))
             {
                 return await DeserializeContent<SegmentsResponse>(response);
             }
@@ -68,7 +74,7 @@ namespace KenticoCloud.Personalization
             }
 
             var uids = new List<string>();
-            var nextLink = $"{SegmentApiRoutePrefix}/{codename}/visitors";
+            var nextLink = $"{_segmentApiRoutePrefix}/{codename}/visitors";
             while (nextLink != null)
             {
                 using (var response = await _httpClient.GetAsync(nextLink))
