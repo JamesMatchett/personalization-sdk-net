@@ -36,8 +36,8 @@ namespace KenticoCloud.Personalization
         /// <param name="projectId">Your project identifier.</param>
         public PersonalizationClient(string endpointUri, string accessToken, Guid projectId)
         {
-            _segmentApiRoutePrefix = $"api/v2/segment/{projectId}";
-            _visitorApiRoutePrefix = $"api/v2/visitor/{projectId}";
+            _segmentApiRoutePrefix = $"v3/segment/{projectId}";
+            _visitorApiRoutePrefix = $"v3/visitor/{projectId}";
 
             _httpClient = new HttpClient { BaseAddress = new Uri(endpointUri) };
             _httpClient.DefaultRequestHeaders.Accept.Clear();
