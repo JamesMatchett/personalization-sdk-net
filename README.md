@@ -37,14 +37,14 @@ Once you create the `PersonalizationClient` instance, you can start querying the
 
 ```C#
 // Retrieves segments of a visitor
-var client = new PersonalizationClient("eyJh...5cCI");
-var visitorSegments = await client.GetVisitorSegmentsAsync("0f2a1fa152b8e92d");
+var client = new PersonalizationClient("<YOUR_API_KEY>", new Guid("<YOUR_PROJECT_ID>"));
+var visitorSegments = await client.GetVisitorSegmentsAsync("<USER_ID>");
 ```
 
 ```C#
 // Retrieves all visitors belonging to a segment
-var client = new PersonalizationClient("eyJh...5cCI");
-var visit = await client.GetVisitorsInSegmentAsync("potential_partners");
+var client = new PersonalizationClient("<YOUR_API_KEY>", new Guid("<YOUR_PROJECT_ID>"));
+var visit = await client.GetVisitorsInSegmentAsync("<SEGMENT_CODENAME");
 ```
 
 ### Example – use in ASP.NET MVC applications
@@ -62,7 +62,7 @@ namespace DancingGoat.Controllers
     public class HomeController : Controller
     {
         // Initializes an instance of the PersonalizationClient class
-        private static readonly PersonalizationClient PersonalizationClient = new PersonalizationClient(<YOUR_API_KEY);
+        var client = new PersonalizationClient("<YOUR_API_KEY>", new Guid("<YOUR_PROJECT_ID>"));
 
         public async Task<ActionResult> Index()
         {
