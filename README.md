@@ -44,7 +44,7 @@ var visitorSegments = await client.GetVisitorSegmentsAsync("<USER_ID>");
 ```C#
 // Retrieves all visitors belonging to a segment
 var client = new PersonalizationClient("<YOUR_API_KEY>", new Guid("<YOUR_PROJECT_ID>"));
-var visit = await client.GetVisitorsInSegmentAsync("<SEGMENT_CODENAME");
+var segmentVisitors = await client.GetVisitorsInSegmentAsync("<SEGMENT_CODENAME");
 ```
 
 ### Example – use in ASP.NET MVC applications
