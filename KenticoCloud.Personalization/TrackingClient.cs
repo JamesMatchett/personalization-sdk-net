@@ -18,7 +18,7 @@ namespace KenticoCloud.Personalization
         private readonly HttpClient _httpClient;
         private readonly RandomIdGenerator _randomIdGenerator = new RandomIdGenerator();
 
-        private const string VisitorApiRoutePrefix = "api/v1/track";
+        private const string VisitorApiRoutePrefix = "v3/track";
         private const int UID_MAX_LENGTH = 20;
 
         /// <summary>
@@ -67,27 +67,27 @@ namespace KenticoCloud.Personalization
 
         /// <summary>
         /// Records custom activity for the visitor in the given session. 
-        /// Activity of the given <paramref name="activityName"/> must be defined in Kentico Cloud application otherwise activity won't be logged.
+        /// Activity of the given <paramref name="activityCodename"/> must be defined in Kentico Cloud application otherwise activity won't be logged.
         /// </summary>
         /// <param name="uid">ID of the tracked visitor</param>
         /// <param name="sid">ID of the session this activity belongs to</param>
-        /// <param name="activityName">Name of the activity</param>
+        /// <param name="activityCodename">Name of the activity</param>
         /// <exception cref="ArgumentException">Thrown when some of the arguments are invalid.</exception>
         /// <exception cref="PersonalizationException">Thrown when request to the Kentico cloud server wasn't successful.</exception>
-        public async Task RecordActivity(string uid, string sid, string activityName)
+        public async Task RecordActivity(string uid, string sid, string activityCodename)
         {
             ValidateUid(uid, nameof(uid));
             ValidateSid(sid, nameof(sid));
-            if (string.IsNullOrEmpty(activityName))
+            if (string.IsNullOrEmpty(activityCodename))
             {
-                throw new ArgumentException("Name of the activity must be set", nameof(activityName));
+                throw new ArgumentException("Name of the activity must be set", nameof(activityCodename));
             }
 
             var postContent = new Dictionary<string, string>
             {
                 { "uid", uid },
                 { "sid", sid },
-                { "name", activityName }
+                { "codename", activityCodename }
             };
 
             await PerformTrackingRequestAsync($"{VisitorApiRoutePrefix}/{_projectId}/activity", postContent);
