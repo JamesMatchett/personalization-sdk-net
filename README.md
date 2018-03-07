@@ -37,14 +37,14 @@ Once you create the `PersonalizationClient` instance, you can start querying the
 
 ```C#
 // Retrieves segments of a visitor
-var client = new PersonalizationClient("eyJh...5cCI");
-var visitorSegments = await client.GetVisitorSegmentsAsync("0f2a1fa152b8e92d");
+var client = new PersonalizationClient("<YOUR_API_KEY>", new Guid("<YOUR_PROJECT_ID>"));
+var visitorSegments = await client.GetVisitorSegmentsAsync("<USER_ID>");
 ```
 
 ```C#
 // Retrieves all visitors belonging to a segment
-var client = new PersonalizationClient("eyJh...5cCI");
-var visit = await client.GetVisitorsInSegmentAsync("potential_partners");
+var client = new PersonalizationClient("<YOUR_API_KEY>", new Guid("<YOUR_PROJECT_ID>"));
+var segmentVisitors = await client.GetVisitorsInSegmentAsync("<SEGMENT_CODENAME>");
 ```
 
 ### Example – use in ASP.NET MVC applications
@@ -62,7 +62,7 @@ namespace DancingGoat.Controllers
     public class HomeController : Controller
     {
         // Initializes an instance of the PersonalizationClient class
-        private static readonly PersonalizationClient PersonalizationClient = new PersonalizationClient(<YOUR_API_KEY);
+        var client = new PersonalizationClient("<YOUR_API_KEY>", new Guid("<YOUR_PROJECT_ID>"));
 
         public async Task<ActionResult> Index()
         {
@@ -116,7 +116,7 @@ client.RecordActivity(uid, sid, activityCodename);
 // Records information about the specified visitor
 var client = new TrackingClient("https://engage-ket.kenticocloud.com", Guid.Parse("38af179c-40ba-42e7-a5ca-33b8cdcc0d45"));
 string uid = "1111136b4af00000";
-string sid = "7899852211af00000;
+string sid = "7899852211af00000";
 Contant contact = new Contact {
     Email = "johnsmith@gmail.com",
     Company = "Alphabet",
