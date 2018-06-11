@@ -1,6 +1,8 @@
 # Kentico Cloud Personalization .NET SDK
 
-[![Build status](https://ci.appveyor.com/api/projects/status/bbn6iy1yok766yux/branch/master?svg=true)](https://ci.appveyor.com/project/kentico/personalization-sdk-net/branch/master) [![Forums](https://img.shields.io/badge/chat-on%20forums-orange.svg)](https://forums.kenticocloud.com)
+[![Build status](https://ci.appveyor.com/api/projects/status/bbn6iy1yok766yux/branch/master?svg=true)](https://ci.appveyor.com/project/kentico/personalization-sdk-net/branch/master) 
+[![Forums](https://img.shields.io/badge/chat-on%20forums-orange.svg)](https://forums.kenticocloud.com)
+[![Analytics](https://ga-beacon.appspot.com/UA-69014260-4/Kentico/personalization-sdk-net)](https://github.com/igrigorik/ga-beacon)
 
 
 | Package | Version |
