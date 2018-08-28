@@ -2,8 +2,6 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/bbn6iy1yok766yux/branch/master?svg=true)](https://ci.appveyor.com/project/kentico/personalization-sdk-net/branch/master) 
 [![Forums](https://img.shields.io/badge/chat-on%20forums-orange.svg)](https://forums.kenticocloud.com)
-[![Analytics](https://ga-beacon.appspot.com/UA-69014260-4/Kentico/personalization-sdk-net?pixel)](https://github.com/igrigorik/ga-beacon)
-
 
 | Package | Version |
 | :-- | :--: |
@@ -132,3 +130,5 @@ client.RecordVisitor(uid, sid, contact);
 
 ## Feedback & Contributing
 Check out the [contributing](https://github.com/Kentico/personalization-sdk-net/blob/master/CONTRIBUTING.md) page to see the best places to file issues, start discussions and begin contributing.
+
+![Analytics](https://kentico-ga-beacon.azurewebsites.net/api/UA-69014260-4/Kentico/personalization-sdk-net?pixel)
