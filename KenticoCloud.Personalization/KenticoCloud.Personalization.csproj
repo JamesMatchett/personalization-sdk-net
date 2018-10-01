@@ -7,7 +7,7 @@
     <NeutralLanguage>en-us</NeutralLanguage>
     <Authors>Kentico Software</Authors>
     <Title>Kentico Cloud Personalization SDK</Title>
-    <TargetFrameworks>netstandard1.3;net451</TargetFrameworks>
+    <TargetFrameworks>net451;netstandard2.0</TargetFrameworks>
     <AssemblyName>KenticoCloud.Personalization</AssemblyName>
     <PackageId>KenticoCloud.Personalization</PackageId>
     <PackageTags>kentico</PackageTags>
